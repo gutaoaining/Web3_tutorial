@@ -1,0 +1,13 @@
+const { ethers } = require("hardhat")
+const { assert } = require("chai")
+
+describe("test fundMe contract",async function() {
+    it("test if the onwer is msg.sender", async function() {
+        const [firstAccount] = await ethers.getSigners()
+        const fundMeFactory = await ethers.getContractFactory("FundMe")
+        const fundMe = await fundMeFactory.deploy(100)
+        await fundMe.waitForDeployment()
+        assert.equal((await fundMe.owner()),firstAccount.address)
+        
+    })
+})
