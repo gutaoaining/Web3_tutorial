@@ -18,14 +18,14 @@ contract MyToken is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Burnable, 
         Ownable(initialOwner)
     {}
 
-    function safeMint(address to, string memory uri)
+    function safeMint(address to)
         public
         onlyOwner
         returns (uint256)
     {
         uint256 tokenId = _nextTokenId++;
         _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+        _setTokenURI(tokenId, METADATA);
         return tokenId;
     }
 
