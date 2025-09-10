@@ -15,16 +15,13 @@ import {SafeERC20} from "@chainlink/contracts/src/v0.8/vendor/openzeppelin-solid
  */
 
 /// @title - A simple messenger contract for sending/receiving string data across chains.
-contract Messenger is CCIPReceiver, OwnerIsCreator {
+contract NFTPoolLockAndRelease is CCIPReceiver, OwnerIsCreator {
     using SafeERC20 for IERC20;
 
     // Custom errors to provide more descriptive revert messages.
     error NotEnoughBalance(uint256 currentBalance, uint256 calculatedFees); // Used to make sure contract has enough balance.
     error NothingToWithdraw(); // Used when trying to withdraw Ether but there's nothing to withdraw.
     error FailedToWithdrawEth(address owner, address target, uint256 value); // Used when the withdrawal of Ether fails.
-    error DestinationChainNotAllowlisted(uint64 destinationChainSelector); // Used when the destination chain has not been allowlisted by the contract owner.
-    error SourceChainNotAllowlisted(uint64 sourceChainSelector); // Used when the source chain has not been allowlisted by the contract owner.
-    error SenderNotAllowlisted(address sender); // Used when the sender has not been allowlisted by the contract owner.
     error InvalidReceiverAddress(); // Used when the receiver address is 0.
 
     // Event emitted when a message is sent to another chain.
