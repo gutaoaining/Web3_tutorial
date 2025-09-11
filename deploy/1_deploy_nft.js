@@ -1,7 +1,7 @@
-const { getNamedAccounts, deployments } = require("hardhat");
+const { getNamedAccounts } = require("hardhat");
 
 module.exports = async({getNamedAccounts, deployments}) =>{
-    const firstAccount = await getNamedAccounts()
+    const {firstAccount} = await getNamedAccounts()
     const {deploy, log} = deployments
 
     log("deploying nft contract")

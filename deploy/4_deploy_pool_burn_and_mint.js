@@ -3,25 +3,25 @@ const { getNamedAccounts } = require("hardhat");
 module.exports = async({getNamedAccounts, deployments}) =>{
     const {firstAccount} = await getNamedAccounts()
     const {deploy, log} = deployments
-    log("NFTPoolLockAndRelease deploying...")
+    log("NFTPoolBurnAndMint deploying...")
 
     //address _router ,address _link , address nftAddr
     const ccipSimulatorDeployment = await deployments.get("CCIPLocalSimulator")
     const ccipSimulator = await ethers.getContractAt("CCIPLocalSimulator", ccipSimulatorDeployment.address)
     const ccipConfig = await ccipSimulator.configuration()
-    const sourceRouter = ccipConfig.sourceRouter_
+    const destinationRouter = ccipConfig.destinationRouter_
     const linkToken =  ccipConfig.linkToken_
-    const nftDeployment = await deployments.get("MyToken")
-    const nftAddr = nftDeployment.address
+    const wnftDeployment = await deployments.get("WrappedMyToken")
+    const wnftAddr = wnftDeployment.address
 
-    await deploy("NFTPoolLockAndRelease",{
-        contract: "NFTPoolLockAndRelease",
+    await deploy("NFTPoolBurnAndMint",{
+        contract: "NFTPoolBurnAndMint",
         from: firstAccount,
         log: true,
-        args:[sourceRouter, linkToken,nftAddr]
+        args:[destinationRouter, linkToken,wnftAddr]
 
     })
-    log("NFTPoolLockAndRelease deployed successfully")
+    log("NFTPoolBurnAndMint deployed successfully")
 }
 
 module.exports.tag = ["sourcechain","all"]

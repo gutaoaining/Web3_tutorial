@@ -4,13 +4,13 @@ module.exports = async({getNamedAccounts, deployments}) =>{
     const {firstAccount} = await getNamedAccounts()
     const {deploy, log} = deployments
 
-    log("deploying CCIP Simulator contract")
-    await deploy("CCIPLocalSimulator",{
-        contract: "CCIPLocalSimulator",
+    log("deploying wnft contract")
+    await deploy("WrappedMyToken",{
+        contract: "WrappedMyToken",
         from: firstAccount,
         log:true,
-        args:[]
+        args:["WrappedMyToken","WMT"]
     })
-    log("CCIP Simulator contract deployed successfully")
+    log("wnft contract deployed successfully")
 }
-module.exports.tags = ["test","all"]
+module.exports.tags = ["destchain","all"]
