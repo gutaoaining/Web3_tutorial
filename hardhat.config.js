@@ -1,7 +1,9 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config()
 require("./tasks")
-require("hardhat-deploy")
+require("@nomicfoundation/hardhat-ethers");
+require("hardhat-deploy");
+require("hardhat-deploy-ethers");
 
 const SEPOLIA_URL = process.env.SEPOLIA_URL
 const PRIVATE_KEY_1 = process.env.PRIVATE_KEY_1
@@ -16,6 +18,11 @@ module.exports = {
       url: SEPOLIA_URL,
       accounts:[PRIVATE_KEY_1,PRIVATE_KEY_2],
       chainId: 11155111
+    }
+  },
+  namedAccounts:{
+    firstAccount: {
+      default: 0
     }
   },
   etherscan: {
