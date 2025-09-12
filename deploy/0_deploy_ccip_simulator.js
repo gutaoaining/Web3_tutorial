@@ -13,4 +13,4 @@ module.exports = async({getNamedAccounts, deployments}) =>{
     })
     log("CCIP Simulator contract deployed successfully")
 }
-module.exports.tags = ["test", "all"]
+module.exports.tags = ["all","test"]

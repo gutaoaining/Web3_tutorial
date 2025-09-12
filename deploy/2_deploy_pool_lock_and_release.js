@@ -24,4 +24,4 @@ module.exports = async({getNamedAccounts, deployments}) =>{
     log("NFTPoolLockAndRelease deployed successfully")
 }
 
-module.exports.tag = ["sourcechain", "all"]
+module.exports.tags = ["all","sourcechain"]

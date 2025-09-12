@@ -13,4 +13,4 @@ module.exports = async({getNamedAccounts, deployments}) =>{
     })
     log("nft contract deployed successfully")
 }
-module.exports.tags = ["sourcechain", "all"]
+module.exports.tags = ["all","sourcechain"]

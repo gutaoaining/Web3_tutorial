@@ -14,7 +14,7 @@ before(async function() {
     await deployments.fixture(["all"])
     ccipSimulator = await ethers.getContract("CCIPLocalSimulator",firstAccount)
     nft = await ethers.getContract("MyToken",firstAccount)
-    // nftPoolLockAndRelease = await ethers.getContract("NFTPoolLockAndRelease",firstAccount)
+    nftPoolLockAndRelease = await ethers.getContract("NFTPoolLockAndRelease",firstAccount)
     wnft = await ethers.getContract("WrappedMyToken",firstAccount)
     // nftPoolBurnAndMint = await ethers.getContract("NFTPoolBurnAndMint",firstAccount)
 })
