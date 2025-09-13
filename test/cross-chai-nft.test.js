@@ -46,13 +46,15 @@ describe("source chain -> dest chain tests", async function() {
         expect(owner).to.equal(nftPoolLockAndRelease)
     })
     
+    it("test if user can get a wrapped nft in dest chain", async function () {
+        const owner = await wnft.ownerOf(0)
+        expect(owner).to.equal(firstAccount)
+    })
 })
 
 
 
-// test if user can lock the nft in the pool and send ccip message on source chain
-
-// test if user can get a wrapped nft in dest chain
+// 
 
 //dest chain -> source chain
 //test if user can burn the wnft and send ccip message on dest chain
