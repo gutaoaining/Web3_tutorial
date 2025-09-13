@@ -52,11 +52,20 @@ describe("source chain -> dest chain tests", async function() {
     })
 })
 
+describe("dest chain -> source chain",async function() {
+    it("test if user can burn the wnft and send ccip message on dest chain", async function() {
+        await wnft.approve(nftPoolBurnAndMint.target, 0)
+        await ccipSimulator.requestLinkFromFaucet(nftPoolBurnAndMint, ethers.parseEther("10"))
+        await nftPoolBurnAndMint.burnAndSendNFT(0, firstAccount, chainSelector, nftPoolLockAndRelease.target)
+        const totalSupply = await wnft.totalSupply()
+        console.log("nft : " + nft.target)
+        console.log("ccip : " + ccipSimulator.target)
+        console.log("firstAccount: " + firstAccount)
+        console.log("nftPoolLockAndRelease: " + nftPoolLockAndRelease.target)
+        console.log("nftPoolBurnAndMint: " + nftPoolBurnAndMint.target)
 
-
-// 
-
-//dest chain -> source chain
-//test if user can burn the wnft and send ccip message on dest chain
+        expect(totalSupply).to.equal(0)
+    })
+})
 
 //test if user have the nft unlocked on source chain
