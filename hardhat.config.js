@@ -4,11 +4,18 @@ require("./tasks")
 require("@nomicfoundation/hardhat-ethers");
 require("hardhat-deploy");
 require("hardhat-deploy-ethers");
+require("@chainlink/env-enc").config()
 
 const SEPOLIA_URL = process.env.SEPOLIA_URL
 const PRIVATE_KEY_1 = process.env.PRIVATE_KEY_1
 const PRIVATE_KEY_2 = process.env.PRIVATE_KEY_2
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
+const AMOY_URL = process.env.AMOY_URL
+
+
+// const PRIVATE_KEY = process.env.PRIVATE_KEY
+// const SEPOLIA_URL = process.env.SEPOLIA_URL
+// const AMOY_URL = process.env.AMOY_URL
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -16,8 +23,15 @@ module.exports = {
   networks:{
     sepolia:{
       url: SEPOLIA_URL,
-      accounts:[PRIVATE_KEY_1,PRIVATE_KEY_2],
-      chainId: 11155111
+      accounts:[PRIVATE_KEY_2,PRIVATE_KEY_1],
+      chainId: 11155111,
+      blockConfirmations: 6
+    },
+    amoy:{
+      url: AMOY_URL,
+      accounts:[PRIVATE_KEY_2],
+      chainId: 80002,
+      blockConfirmations: 6
     }
   },
   namedAccounts:{

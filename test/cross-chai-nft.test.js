@@ -66,6 +66,8 @@ describe("dest chain -> source chain",async function() {
 
         expect(totalSupply).to.equal(0)
     })
+    it("test if user have the nft unlocked on source chain", async function() {
+        const owner = await nft.ownerOf(0)
+        expect(owner).to.equal(firstAccount)
+    })
 })
-
-//test if user have the nft unlocked on source chain
