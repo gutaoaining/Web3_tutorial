@@ -46,28 +46,59 @@ task("lock-and-cross")
         const balanceAfter = await linkToken.balanceOf(nftPoolLockAndRelease.target)
         console.log(`balance after: ${balanceAfter}`)
 
+ 
         // approve the pool have the permision to transfer deployer's token
         const nft = await ethers.getContract("MyToken", firstAccount)
-        await nft.approve(nftPoolLockAndRelease.target, tokenId)
+        const owner = await nft.ownerOf(tokenId);
+        const [deployer] = await ethers.getSigners();
+        console.log("NFT owner: ", owner);
+        console.log("Deployer address: ", deployer.address);
+
+        const approveTx = await nft.approve(nftPoolLockAndRelease.target, tokenId)
+        await approveTx.wait(2);
         console.log("approve successfully")
         const approved = await nft.getApproved(tokenId);
         console.log("Approved address: ", approved);
         console.log("nftPoolLockAndRelease.target: ", nftPoolLockAndRelease.target);
 
-        
+        console.log("Approval confirmed with hash:", approveTx.hash);
 
         // ccip send
         console.log(`${tokenId}, ${firstAccount}, ${destChainSelector}, ${destReceiver}`)
+
+        const ccipRouter = await nftPoolLockAndRelease.getRouter();
+        console.log("CCIP Router address: ", ccipRouter);
+            try {
+            const gasEstimate = await nftPoolLockAndRelease.lockAndSendNFT.estimateGas(
+                tokenId,
+                firstAccount,
+                destChainSelector,
+                destReceiver
+            );
+            console.log("Gas estimate: ", gasEstimate.toString());
+        } catch (estimateError) {
+            console.error("Gas estimate failed:", estimateError.reason || estimateError.message);
+            return; // 如果gas估算失败，停止执行
+        }
+
+        
         const lockAndCrossTx = await nftPoolLockAndRelease
             .lockAndSendNFT(
             tokenId, 
             firstAccount, 
             destChainSelector, 
-            destReceiver
+            destReceiver,
+            {
+                gasLimit: 300000, // 添加足够的gas限制
+            }
         )
         
         // provide t
         console.log(`NFT locked and crossed, transaction hash is ${lockAndCrossTx.hash}`)
+        // 等待交易确认
+        const receipt = await lockAndCrossTx.wait(2);
+        console.log("Transaction confirmed in block:", receipt.blockNumber);
+        console.log("Status:", receipt.status === 1 ? "Success" : "Failed");
 })
 
 module.exports = {}
