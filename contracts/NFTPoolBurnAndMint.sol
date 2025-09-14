@@ -22,7 +22,6 @@ contract NFTPoolBurnAndMint is CCIPReceiver, OwnerIsCreator {
     error NotEnoughBalance(uint256 currentBalance, uint256 calculatedFees); // Used to make sure contract has enough balance.
     error NothingToWithdraw(); // Used when trying to withdraw Ether but there's nothing to withdraw.
     error FailedToWithdrawEth(address owner, address target, uint256 value); // Used when the withdrawal of Ether fails.
-    error InvalidReceiverAddress(); // Used when the receiver address is 0.
 
     // Event emitted when a message is sent to another chain.
     event MessageSent(
@@ -58,13 +57,6 @@ contract NFTPoolBurnAndMint is CCIPReceiver, OwnerIsCreator {
     constructor(address _router, address _link, address wnftAddr) CCIPReceiver(_router) {
         s_linkToken = IERC20(_link);
         wnft = WrappedMyToken(wnftAddr);
-    }
-
-    /// @dev Modifier that checks the receiver address is not 0.
-    /// @param _receiver The receiver address.
-    modifier validateReceiver(address _receiver) {
-        if (_receiver == address(0)) revert InvalidReceiverAddress();
-        _;
     }
 
     function burnAndSendNFT(
@@ -147,10 +139,6 @@ contract NFTPoolBurnAndMint is CCIPReceiver, OwnerIsCreator {
         uint256 tokenId = data.tokenId;
         address newOwner = data.newOwner;
         wnft.mintTokenWithSpecificTokenId(newOwner, tokenId);
-
-        s_lastReceivedMessageId = any2EvmMessage.messageId; // fetch the messageId
-        s_lastReceivedText = abi.decode(any2EvmMessage.data, (string)); // abi-decoding of the sent text
-
         emit TokenMinted(tokenId, newOwner);
     }
 

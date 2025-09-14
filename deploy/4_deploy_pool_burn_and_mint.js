@@ -22,7 +22,11 @@ module.exports = async({getNamedAccounts, deployments}) =>{
 
     const wnftDeployment = await deployments.get("WrappedMyToken")
     const wnftAddr = wnftDeployment.address
+    const [deployer] = await ethers.getSigners();
+    console.log("Deploying with:", deployer.address);
+    console.log("network.config.chainId: ", network.config.chainId);
 
+    console.log("Balance:", (await ethers.provider.getBalance(firstAccount)));
     await deploy("NFTPoolBurnAndMint",{
         contract: "NFTPoolBurnAndMint",
         from: firstAccount,
