@@ -1,10 +1,11 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config()
-require("./tasks")
 require("@nomicfoundation/hardhat-ethers");
 require("hardhat-deploy");
 require("hardhat-deploy-ethers");
 require("@chainlink/env-enc").config()
+require("./tasks")
+
 
 const SEPOLIA_URL = process.env.SEPOLIA_URL
 const PRIVATE_KEY_1 = process.env.PRIVATE_KEY_1
@@ -25,13 +26,19 @@ module.exports = {
       url: SEPOLIA_URL,
       accounts:[PRIVATE_KEY_2,PRIVATE_KEY_1],
       chainId: 11155111,
-      blockConfirmations: 6
+      blockConfirmations: 6,
+      companionNetworks: {
+        destChain: "amoy"
+      }
     },
     amoy:{
       url: AMOY_URL,
       accounts:[PRIVATE_KEY_2],
       chainId: 80002,
-      blockConfirmations: 6
+      blockConfirmations: 6,
+      companionNetworks: {
+        destChain: "sepolia"
+      }
     }
   },
   namedAccounts:{
