@@ -12,6 +12,8 @@ const PRIVATE_KEY_1 = process.env.PRIVATE_KEY_1
 const PRIVATE_KEY_2 = process.env.PRIVATE_KEY_2
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const AMOY_URL = process.env.AMOY_URL
+const SAIGON_URL = process.env.SAIGON_URL
+
 
 
 // const PRIVATE_KEY = process.env.PRIVATE_KEY
@@ -33,6 +35,15 @@ module.exports = {
     },
     amoy:{
       url: AMOY_URL,
+      accounts:[PRIVATE_KEY_2],
+      chainId: 80002,
+      blockConfirmations: 6,
+      companionNetworks: {
+        destChain: "sepolia"
+      }
+    },
+    saigon:{
+      url: SAIGON_URL,
       accounts:[PRIVATE_KEY_2],
       chainId: 80002,
       blockConfirmations: 6,
