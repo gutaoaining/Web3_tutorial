@@ -45,11 +45,8 @@ module.exports = {
     saigon:{
       url: SAIGON_URL,
       accounts:[PRIVATE_KEY_2],
-      chainId: 80002,
-      blockConfirmations: 6,
-      companionNetworks: {
-        destChain: "sepolia"
-      }
+      chainId: 2021,
+      blockConfirmations: 3
     }
   },
   namedAccounts:{
