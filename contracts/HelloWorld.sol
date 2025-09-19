@@ -14,11 +14,11 @@ contract HelloWorld{
 
     constructor(){
         owner = msg.sender;
-        
+        addPassList(owner);
     }
 
     function setHelloWorldPhrases(string memory newPhrases) public {
-        require(passList[msg.sender],"you are not in the passList");
+        require(passList[msg.sender],"you are not in the passList ");
         phrases[msg.sender] = newPhrases;
     }
 
