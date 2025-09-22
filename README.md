@@ -1,6 +1,6 @@
 内容介绍
 1、如何使用
-    将 repo clone到本地： git clone https://github.com/smartcontractkit/Web3_tutorial_Chinese.git
+    将 repo clone到本地： git clone https://github.com/gutaoaining/Web3_tutorial.git
     进入 lesson-4 文件夹 cd Web3_tutorial_Chinese/lesson-4
     安装 NPM package
     运行 npm install 安装 NPM package
