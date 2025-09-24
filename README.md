@@ -53,3 +53,5 @@
     e、燃烧并且跨链 wnft：npx hardhat burn-and-cross --tokenid 0 --network amoy
 
     7、再次查看 nft 状态：npx hardhat check-nft --network sepolia
+
+3、构建一个 ERC20 的合约，让这个合约可以进行fund，然后铸造token
