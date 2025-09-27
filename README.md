@@ -43,15 +43,10 @@
 在 dest chain 部署合约：npx hardhat deploy --tags destchain --network amoy 如果你在上一步使用的不是 sepolia 和 amoy，那么请相应调整 network 名字
 
     a、铸造 nft：npx hardhat mint-nft --network sepolia
-
     b、查看 nft 状态：npx hardhat check-nft --network sepolia
-
     c、锁定并且跨链 nft：npx hardhat lock-and-cross --tokenid 0 --network sepolia
-
     d、查看 wrapped NFT 状态：npx hardhat check-wrapped-nft --tokenid 0 --network amoy
-
     e、燃烧并且跨链 wnft：npx hardhat burn-and-cross --tokenid 0 --network amoy
-
-    7、再次查看 nft 状态：npx hardhat check-nft --network sepolia
+    f、再次查看 nft 状态：npx hardhat check-nft --network sepolia
 
 3、构建一个 ERC20 的合约，让这个合约可以进行fund，然后铸造token
