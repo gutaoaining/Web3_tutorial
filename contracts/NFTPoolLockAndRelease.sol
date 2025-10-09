@@ -120,7 +120,6 @@ contract NFTPoolLockAndRelease is CCIPReceiver, OwnerIsCreator {
             address(s_linkToken),
             fees
         );
-
         // Return the CCIP message ID
         return messageId;
     }

@@ -69,7 +69,6 @@ contract FundMe {
         // send: transfer ETH and return false if failed
         // bool success = payable(msg.sender).send(address(this).balance);
         // require(success, "tx failed");
-        
         // call: transfer ETH with data return value of function and bool 
         bool success;
         (success, ) = payable(msg.sender).call{value: address(this).balance}("");

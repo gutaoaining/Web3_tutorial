@@ -41,7 +41,6 @@ contract Flower is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, Automati
     }
 
     // The following functions are overrides required by Solidity.
-
     function _update(address to, uint256 tokenId, address auth)
         internal
         override(ERC721, ERC721Enumerable)
